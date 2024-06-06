@@ -38,6 +38,8 @@ async function run() {
 
     const AllCollegeCollection = client.db('boot_Camp').collection("collegeDetailsDb");
     const testimonialCollection = client.db('boot_Camp').collection("testimonials");
+    const allUsersCollection = client.db('boot_Camp').collection("users");
+    const allAdmissionCollection = client.db('boot_Camp').collection("admission");
 
 
     
@@ -52,6 +54,16 @@ async function run() {
 
     app.get("/testimonials" , async(req , res)=>{
       const cursur = testimonialCollection.find();
+      const result = await cursur.toArray();
+      res.send(result)
+    })
+    app.get("/users" , async(req , res)=>{
+      const cursur = allUsersCollection.find();
+      const result = await cursur.toArray();
+      res.send(result)
+    })
+    app.get("/admission" , async(req , res)=>{
+      const cursur = allAdmissionCollection.find();
       const result = await cursur.toArray();
       res.send(result)
     })
@@ -106,6 +118,21 @@ async function run() {
     app.post("/testimonials", async(req , res)=> {
       const brand = req.body;
       const result = await testimonialCollection.insertOne(brand)  
+    // console.log(brand); 
+      res.send(result)
+  })
+    app.post("/admission", async(req , res)=> {
+      const brand = req.body;
+      const result = await allAdmissionCollection.insertOne(brand)  
+    // console.log(brand); 
+      res.send(result)
+  })
+
+
+
+    app.post("/users", async(req , res)=> {
+      const brand = req.body;
+      const result = await allUsersCollection.insertOne(brand)  
     // console.log(brand); 
       res.send(result)
   })
