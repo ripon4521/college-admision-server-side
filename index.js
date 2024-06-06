@@ -80,25 +80,32 @@ async function run() {
       res.send(result)
     })
 
-
-    // app.put("/update/:id" , async(req , res)=>{
+    // app.get("/allCollegeData/:id" , async(req , res)=>{
     //   const   id  = req.params.id;
-    //   const filter = {_id : new ObjectId(id)}
-    //   const option = {upsert: true}
-    //   const updateBrand = req.body;
-    //   const brand ={
-    //     $set:{
-    //       productName:updateBrand.productName,
-    //        brandName:updateBrand.brandName ,
-    //         typeName:updateBrand.typeName ,
-    //          rating:updateBrand.rating,
-    //          url:updateBrand.url,
-    //          price:updateBrand.price
-    //     }
-    //   }
-    //   const result = await bransCollection.updateOne(filter,brand,option);
+    //   const queary = {_id : new ObjectId(id)}
+    //   const result = await AllCollegeCollection.findOne(queary);
     //   res.send(result)
     // })
+
+
+    app.put("/update/:id" , async(req , res)=>{
+      const   id  = req.params.id;
+      const filter = {_id : new ObjectId(id)}
+      const option = {upsert: true}
+      const updateBrand = req.body;
+      console.log(updateBrand)
+      const brand ={
+        $set:{
+            name:updateBrand.name,
+            email:updateBrand.email ,
+            address:updateBrand.address ,
+            university:updateBrand.university,
+      
+        }
+      }
+      const result = await allUsersCollection.updateOne(filter,brand,option);
+      res.send(result)
+    })
 
     
 
